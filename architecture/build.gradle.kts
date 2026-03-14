@@ -36,7 +36,7 @@ dependencies {
 
     add(ktlintCli.name, "com.pinterest.ktlint:ktlint-cli:1.8.0")
 
-    testImplementation(platform("org.junit:junit-bom:5.13.4"))
+    testImplementation(platform("org.junit:junit-bom:6.0.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("com.lemonappdev:konsist:0.17.3")
