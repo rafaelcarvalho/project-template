@@ -34,7 +34,7 @@ dependencies {
     implementation(libs.detekt.gradle.plugin)
     implementation(libs.ktlint.gradle.plugin)
 
-    add(ktlintCli.name, "com.pinterest.ktlint:ktlint-cli:1.5.0")
+    add(ktlintCli.name, "com.pinterest.ktlint:ktlint-cli:1.8.0")
 
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
