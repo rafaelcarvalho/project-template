@@ -1,0 +1,8 @@
+.git
+.github
+.gradle
+.kotlin
+.idea
+.vscode
+**/build
+**/.DS_Store

@@ -1,0 +1,19 @@
+.gradle/
+build/
+**/build/
+out/
+
+.idea/
+*.iml
+
+.DS_Store
+
+*.log
+
+.kotlin/
+
+.vscode/
+
+reports/
+# IntelliJ HTTP Client — variáveis de ambiente com dados sensíveis
+http-client.private.env.json
