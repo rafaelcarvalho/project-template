@@ -2,6 +2,7 @@ package io.github.rafaelcarvalho.architecture
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.verify.assertTrue
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 import java.nio.file.Files
@@ -35,6 +36,12 @@ class ModuleArchitectureTest {
         )
         Konsist.scopeFromDirectory(sourcePath)
     }
+
+    private fun isFrameworkImport(importName: String): Boolean =
+        importName.startsWith("org.springframework") ||
+            CLOUD_IMPORT_PREFIXES.values.any { prefixes ->
+                prefixes.any { prefix -> importName.startsWith(prefix) }
+            }
 
     @Test
     fun `layered architecture is respected`() {
@@ -72,8 +79,25 @@ class ModuleArchitectureTest {
     fun `core never imports spring`() {
         scope.files.assertTrue { file ->
             val isCore = file.packagee?.name?.contains(".core") == true
-            !isCore || file.imports.none { it.name.startsWith("org.springframework") }
+            !isCore || file.imports.none { declarationImport -> isFrameworkImport(declarationImport.name) }
         }
+    }
+
+    @Test
+    fun `module code must use at most one cloud provider`() {
+        val importedProviders =
+            scope.files
+                .flatMap { file -> file.imports }
+                .mapNotNull { declarationImport ->
+                    CLOUD_IMPORT_PREFIXES.entries.firstOrNull { (provider, prefixes) ->
+                        prefixes.any { prefix -> declarationImport.name.startsWith(prefix) }
+                    }?.key
+                }.toSet()
+
+        assertTrue(
+            importedProviders.size <= 1,
+            "Module '$moduleName' mixes cloud SDKs from multiple providers: ${importedProviders.sorted().joinToString()}.",
+        )
     }
 
     @Test
@@ -202,8 +226,7 @@ class ModuleArchitectureTest {
                 (
                     declaration.resideInPackage("..core.exceptions..") &&
                         declaration.containingFile.imports.none { import ->
-                            import.name.startsWith("org.springframework") ||
-                                import.name.startsWith("software.amazon")
+                            isFrameworkImport(import.name)
                         }
                 )
         }
@@ -214,8 +237,7 @@ class ModuleArchitectureTest {
         scope.classes().assertTrue { declaration ->
             !declaration.resideInPackage("..core.models..") ||
                 declaration.containingFile.imports.none { import ->
-                    import.name.startsWith("org.springframework") ||
-                        import.name.startsWith("software.amazon") ||
+                    isFrameworkImport(import.name) ||
                         (import.name.contains(".core.") && !import.name.contains(".core.models."))
                 }
         }
@@ -233,8 +255,7 @@ class ModuleArchitectureTest {
         scope.interfaces().assertTrue { declaration ->
             !declaration.resideInPackage("..core.gateways..") ||
                 declaration.containingFile.imports.none { import ->
-                    import.name.startsWith("org.springframework") ||
-                        import.name.startsWith("software.amazon")
+                    isFrameworkImport(import.name)
                 }
         }
     }
@@ -278,5 +299,14 @@ class ModuleArchitectureTest {
         scope.classes().assertTrue { declaration ->
             !declaration.name.endsWith("UseCase") || declaration.resideInPackage("..core.usecases..")
         }
+    }
+
+    private companion object {
+        private val CLOUD_IMPORT_PREFIXES =
+            mapOf(
+                "aws" to setOf("software.amazon.awssdk"),
+                "gcp" to setOf("com.google.cloud", "com.google.api.gax", "com.google.auth"),
+                "oci" to setOf("com.oracle.bmc"),
+            )
     }
 }

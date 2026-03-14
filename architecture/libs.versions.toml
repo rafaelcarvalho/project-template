@@ -15,6 +15,10 @@ konsist = "0.17.3"
 jacoco = "0.8.13"
 spring-cloud-contract = "4.3.0"
 aws-sdk = "2.31.28"
+gcp-bom = "26.78.0"
+oci-sdk = "3.81.1"
+postgresql = "42.7.10"
+oracle-jdbc = "23.26.1.0.0"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -52,8 +56,28 @@ testcontainers-junit = { module = "org.testcontainers:junit-jupiter", version.re
 testcontainers-localstack = { module = "org.testcontainers:localstack", version.ref = "testcontainers" }
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 aws-dynamodb = { module = "software.amazon.awssdk:dynamodb", version.ref = "aws-sdk" }
+aws-rds = { module = "software.amazon.awssdk:rds", version.ref = "aws-sdk" }
+aws-rdsdata = { module = "software.amazon.awssdk:rdsdata", version.ref = "aws-sdk" }
 aws-sns = { module = "software.amazon.awssdk:sns", version.ref = "aws-sdk" }
 aws-sqs = { module = "software.amazon.awssdk:sqs", version.ref = "aws-sdk" }
 aws-secretsmanager = { module = "software.amazon.awssdk:secretsmanager", version.ref = "aws-sdk" }
+aws-s3 = { module = "software.amazon.awssdk:s3", version.ref = "aws-sdk" }
 aws-url-connection-client = { module = "software.amazon.awssdk:url-connection-client", version.ref = "aws-sdk" }
 aws-bom = { module = "software.amazon.awssdk:bom", version.ref = "aws-sdk" }
+gcp-bom = { module = "com.google.cloud:libraries-bom", version.ref = "gcp-bom" }
+gcp-core = { module = "com.google.cloud:google-cloud-core" }
+gcp-alloydb = { module = "com.google.cloud:google-cloud-alloydb" }
+gcp-alloydb-connectors = { module = "com.google.cloud:google-cloud-alloydb-connectors" }
+gcp-firestore = { module = "com.google.cloud:google-cloud-firestore" }
+gcp-pubsub = { module = "com.google.cloud:google-cloud-pubsub" }
+gcp-storage = { module = "com.google.cloud:google-cloud-storage" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+oracle-jdbc = { module = "com.oracle.database.jdbc:ojdbc11", version.ref = "oracle-jdbc" }
+oci-bom = { module = "com.oracle.oci.sdk:oci-java-sdk-bom", version.ref = "oci-sdk" }
+oci-common = { module = "com.oracle.oci.sdk:oci-java-sdk-common", version.ref = "oci-sdk" }
+oci-common-httpclient-jersey3 = { module = "com.oracle.oci.sdk:oci-java-sdk-common-httpclient-jersey3", version.ref = "oci-sdk" }
+oci-database = { module = "com.oracle.oci.sdk:oci-java-sdk-database", version.ref = "oci-sdk" }
+oci-nosql = { module = "com.oracle.oci.sdk:oci-java-sdk-nosql", version.ref = "oci-sdk" }
+oci-ons = { module = "com.oracle.oci.sdk:oci-java-sdk-ons", version.ref = "oci-sdk" }
+oci-queue = { module = "com.oracle.oci.sdk:oci-java-sdk-queue", version.ref = "oci-sdk" }
+oci-objectstorage = { module = "com.oracle.oci.sdk:oci-java-sdk-objectstorage", version.ref = "oci-sdk" }

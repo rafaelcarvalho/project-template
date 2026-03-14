@@ -27,7 +27,10 @@ project-template/
 │   │   ├── rafaelcarvalho.spring.gradle.kts         # Spring BOM, WebFlux, Actuator
 │   │   ├── rafaelcarvalho.testing.gradle.kts        # JUnit 5, MockK, Testcontainers
 │   │   ├── rafaelcarvalho.quality.gradle.kts        # Jacoco, Detekt, Ktlint
-│   │   └── rafaelcarvalho.architecture.gradle.kts   # Konsist (fitness functions)
+│   │   ├── rafaelcarvalho.architecture.gradle.kts   # Konsist (fitness functions)
+│   │   ├── rafaelcarvalho.aws.gradle.kts            # AWS SDK + capability-based module setup
+│   │   ├── rafaelcarvalho.gcp.gradle.kts            # GCP SDK + capability-based module setup
+│   │   └── rafaelcarvalho.oci.gradle.kts            # OCI SDK + capability-based module setup
 │   ├── src/shared-test/kotlin/ # ModuleArchitectureTest — injected into every domain module
 │   └── src/test/kotlin/        # ArchitectureIsolationTest — cross-module isolation validation
 └── gradle/wrapper/
@@ -124,6 +127,29 @@ All domain modules use these plugins via Gradle DSL:
 | `rafaelcarvalho.testing` | JUnit 5, MockK, Testcontainers, spring-webflux test |
 | `rafaelcarvalho.quality` | Jacoco, Detekt and Ktlint wired into the lifecycle |
 | `rafaelcarvalho.architecture` | Konsist injected as JUnit tests in each module |
+| `rafaelcarvalho.aws` | AWS SDK with platform capabilities for Aurora PostgreSQL, DynamoDB, SNS/SQS and S3 |
+| `rafaelcarvalho.gcp` | GCP SDK with platform capabilities for AlloyDB PostgreSQL, Firestore, Pub/Sub and Cloud Storage |
+| `rafaelcarvalho.oci` | OCI SDK with platform capabilities for Oracle Database, NoSQL, ONS/Queue and Object Storage |
+
+### Cloud Capabilities Per Module
+
+Cloud plugins are mutually exclusive per module. A module can apply only one provider plugin and then declare the required capabilities through the generated `platform` DSL:
+
+```kotlin
+plugins {
+    id("rafaelcarvalho.aws")
+}
+
+platform("rds", "nosql", "broker", "storage")
+```
+
+Provider mappings:
+
+| Plugin | `rds` | `nosql` | `broker` | `storage` |
+|--------|-------|---------|----------|-----------|
+| `rafaelcarvalho.aws` | Aurora PostgreSQL (`postgresql`, RDS, RDS Data, Secrets Manager) | DynamoDB | SNS + SQS | S3 |
+| `rafaelcarvalho.gcp` | AlloyDB for PostgreSQL (`postgresql`, AlloyDB client, connectors) | Firestore | Pub/Sub | Cloud Storage |
+| `rafaelcarvalho.oci` | Oracle Database (`ojdbc11`, OCI Database SDK) | OCI NoSQL | OCI Notifications + Queue | OCI Object Storage |
 
 ---
 
@@ -135,6 +161,7 @@ The build automatically validates:
 - **Domain purity** — `core` layer cannot depend on Spring, Jackson, or persistence frameworks
 - **Layer hierarchy** — `core` ← `application` ← `adapters` ← `configurations`
 - **Naming conventions** — `*UseCase`, `*Gateway`, `*Adapter`, etc., enforced per layer
+- **Single cloud per module** — code cannot mix AWS, GCP, and OCI SDK imports in the same module
 
 These are not suggestions — they **fail the build** on violation.
 

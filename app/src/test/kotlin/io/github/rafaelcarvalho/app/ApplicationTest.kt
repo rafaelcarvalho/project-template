@@ -8,6 +8,5 @@ import org.springframework.test.context.ActiveProfiles
 @ActiveProfiles("test")
 class ApplicationTest {
     @Test
-    fun `context loads`() {
-    }
+    fun `context loads`() = Unit
 }
