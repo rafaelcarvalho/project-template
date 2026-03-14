@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk AS builder
+FROM eclipse-temurin:25-jdk AS builder
 
 WORKDIR /workspace
 
@@ -23,7 +23,7 @@ RUN ./gradlew :app:bootJar -x test --no-daemon --no-configuration-cache
 # determinar se a aplicacao esta saudavel apos o start-up.
 FROM busybox:musl AS wget-provider
 
-FROM gcr.io/distroless/java21-debian12:nonroot
+FROM gcr.io/distroless/java25-debian12:nonroot
 
 WORKDIR /app
 COPY --from=builder /workspace/app/build/libs/*.jar /app/application.jar

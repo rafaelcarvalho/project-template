@@ -41,7 +41,7 @@ detekt {
 }
 
 ktlint {
-    version.set("1.5.0")
+    version.set("1.8.0")
 }
 
 jacoco {

@@ -9,12 +9,12 @@ group = "io.github.rafaelcarvalho.architecture"
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
     }
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    options.release.set(21)
+    options.release.set(25)
 }
 
 val ktlintCli =
@@ -34,7 +34,7 @@ dependencies {
     implementation(libs.detekt.gradle.plugin)
     implementation(libs.ktlint.gradle.plugin)
 
-    add(ktlintCli.name, "com.pinterest.ktlint:ktlint-cli:1.5.0")
+    add(ktlintCli.name, "com.pinterest.ktlint:ktlint-cli:1.8.0")
 
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
