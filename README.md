@@ -127,20 +127,33 @@ All domain modules use these plugins via Gradle DSL:
 | `rafaelcarvalho.testing` | JUnit 5, MockK, Testcontainers, spring-webflux test |
 | `rafaelcarvalho.quality` | Jacoco, Detekt and Ktlint wired into the lifecycle |
 | `rafaelcarvalho.architecture` | Konsist injected as JUnit tests in each module |
-| `rafaelcarvalho.aws` | AWS SDK with platform capabilities for Aurora PostgreSQL, DynamoDB, SNS/SQS and S3 |
-| `rafaelcarvalho.gcp` | GCP SDK with platform capabilities for AlloyDB PostgreSQL, Firestore, Pub/Sub and Cloud Storage |
-| `rafaelcarvalho.oci` | OCI SDK with platform capabilities for Oracle Database, NoSQL, ONS/Queue and Object Storage |
+| `rafaelcarvalho.demo` | Demo/sample module conventions with non-executable packaging by default |
 
 ### Cloud Capabilities Per Module
 
-Cloud plugins are mutually exclusive per module. A module can apply only one provider plugin and then declare the required capabilities through the generated `platform` DSL:
+Cloud platform is unique per project. Declare it once in the root build file, then declare only capabilities in each module.
+
+```kotlin
+// root build.gradle.kts
+extra["cloud.platform"] = "aws"
+```
 
 ```kotlin
 plugins {
-    id("rafaelcarvalho.aws")
+    id("rafaelcarvalho.module")
 }
 
-platform("rds", "nosql", "broker", "storage")
+extra["cloud.capabilities"] = "rds,nosql,broker,storage"
+```
+
+For demo/sample modules that should not produce an executable Spring Boot jar:
+
+```kotlin
+plugins {
+    id("rafaelcarvalho.demo")
+}
+
+extra["cloud.capabilities"] = "rds,broker"
 ```
 
 Provider mappings:
@@ -161,7 +174,7 @@ The build automatically validates:
 - **Domain purity** — `core` layer cannot depend on Spring, Jackson, or persistence frameworks
 - **Layer hierarchy** — `core` ← `application` ← `adapters` ← `configurations`
 - **Naming conventions** — `*UseCase`, `*Gateway`, `*Adapter`, etc., enforced per layer
-- **Single cloud per module** — code cannot mix AWS, GCP, and OCI SDK imports in the same module
+- **Single cloud per project** — all modules resolve dependencies against one project-level platform, and code cannot mix AWS, GCP, and OCI SDK imports in the same module
 
 These are not suggestions — they **fail the build** on violation.
 

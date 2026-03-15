@@ -49,28 +49,38 @@ class ModuleArchitectureTest {
             val pkg = file.packagee?.name ?: return@assertTrue true
             val segments = pkg.split(".")
             when {
-                segments.any { it == "core" } ->
+                segments.any { it == "core" } -> {
                     file.imports.none { import ->
                         val imp = import.name
                         imp.contains(".applications.") ||
                             imp.contains(".adapters.") ||
                             imp.contains(".configurations.")
                     }
-                segments.any { it == "applications" } ->
+                }
+
+                segments.any { it == "applications" } -> {
                     file.imports.none { import ->
                         val imp = import.name
                         imp.contains(".adapters.") || imp.contains(".configurations.")
                     }
-                segments.any { it == "adapters" } ->
+                }
+
+                segments.any { it == "adapters" } -> {
                     file.imports.none { import ->
                         val imp = import.name
                         imp.contains(".applications.") || imp.contains(".configurations.")
                     }
-                segments.any { it == "configurations" } ->
+                }
+
+                segments.any { it == "configurations" } -> {
                     file.imports.none { import ->
                         import.name.contains(".applications.")
                     }
-                else -> true
+                }
+
+                else -> {
+                    true
+                }
             }
         }
     }
@@ -89,9 +99,10 @@ class ModuleArchitectureTest {
             scope.files
                 .flatMap { file -> file.imports }
                 .mapNotNull { declarationImport ->
-                    CLOUD_IMPORT_PREFIXES.entries.firstOrNull { (provider, prefixes) ->
-                        prefixes.any { prefix -> declarationImport.name.startsWith(prefix) }
-                    }?.key
+                    CLOUD_IMPORT_PREFIXES.entries
+                        .firstOrNull { (_, prefixes) ->
+                            prefixes.any { prefix -> declarationImport.name.startsWith(prefix) }
+                        }?.key
                 }.toSet()
 
         assertTrue(

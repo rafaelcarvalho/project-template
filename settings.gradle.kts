@@ -26,5 +26,6 @@ dependencyResolutionManagement {
 }
 
 include("app")
+include("catalog")
 
 rootProject.name = "project-template"

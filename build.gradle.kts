@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.graalvm.native) apply false
 }
 
+extra["cloud.platform"] = "none"
+
 subprojects {
     group = "io.github.rafaelcarvalho"
     version =
