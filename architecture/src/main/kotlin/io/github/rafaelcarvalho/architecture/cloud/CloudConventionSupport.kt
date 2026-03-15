@@ -139,7 +139,8 @@ private val CLOUD_PROVIDER_MAPPINGS: Map<CloudProvider, CloudProviderMapping> =
                     mapOf(
                         CloudCapability.RDS to
                             listOf(
-                                CatalogDependency.library("postgresql"),
+                                CatalogDependency.library("spring-boot-starter-data-r2dbc"),
+                                CatalogDependency.runtimeLibrary("r2dbc-postgresql"),
                                 CatalogDependency.library("aws-rds"),
                                 CatalogDependency.library("aws-rdsdata"),
                                 CatalogDependency.library("aws-secretsmanager"),
@@ -174,7 +175,8 @@ private val CLOUD_PROVIDER_MAPPINGS: Map<CloudProvider, CloudProviderMapping> =
                     mapOf(
                         CloudCapability.RDS to
                             listOf(
-                                CatalogDependency.library("postgresql"),
+                                CatalogDependency.library("spring-boot-starter-data-r2dbc"),
+                                CatalogDependency.runtimeLibrary("r2dbc-postgresql"),
                                 CatalogDependency.library("gcp-alloydb"),
                                 CatalogDependency.library("gcp-alloydb-connectors"),
                             ),
@@ -222,7 +224,8 @@ private val CLOUD_PROVIDER_MAPPINGS: Map<CloudProvider, CloudProviderMapping> =
                     mapOf(
                         CloudCapability.RDS to
                             listOf(
-                                CatalogDependency.library("postgresql"),
+                                CatalogDependency.library("spring-boot-starter-data-r2dbc"),
+                                CatalogDependency.runtimeLibrary("r2dbc-postgresql"),
                                 CatalogDependency.testLibrary("testcontainers-postgresql"),
                             ),
                         CloudCapability.NOSQL to

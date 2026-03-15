@@ -18,7 +18,6 @@ spring-cloud-contract = "4.3.0"
 aws-sdk = "2.31.28"
 gcp-bom = "26.78.0"
 oci-sdk = "3.81.1"
-postgresql = "42.7.10"
 oracle-jdbc = "23.26.1.0.0"
 
 [plugins]
@@ -40,8 +39,11 @@ detekt-gradle-plugin = { module = "dev.detekt:detekt-gradle-plugin", version.ref
 ktlint-gradle-plugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint-plugin" }
 graalvm-native-gradle-plugin = { module = "org.graalvm.buildtools:native-gradle-plugin", version.ref = "graalvm-native" }
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
+spring-boot-starter-data-r2dbc = { module = "org.springframework.boot:spring-boot-starter-data-r2dbc" }
 spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-cloud-contract-stub-runner = { module = "org.springframework.cloud:spring-cloud-starter-contract-stub-runner", version.ref = "spring-cloud-contract" }
 spring-webflux-test = { module = "org.springframework:spring-webflux" }
@@ -76,7 +78,7 @@ gcp-alloydb-connectors = { module = "com.google.cloud:google-cloud-alloydb-conne
 gcp-firestore = { module = "com.google.cloud:google-cloud-firestore" }
 gcp-pubsub = { module = "com.google.cloud:google-cloud-pubsub" }
 gcp-storage = { module = "com.google.cloud:google-cloud-storage" }
-postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+r2dbc-postgresql = { module = "org.postgresql:r2dbc-postgresql" }
 oracle-jdbc = { module = "com.oracle.database.jdbc:ojdbc11", version.ref = "oracle-jdbc" }
 spring-boot-starter-data-mongodb-reactive = { module = "org.springframework.boot:spring-boot-starter-data-mongodb-reactive" }
 spring-kafka = { module = "org.springframework.kafka:spring-kafka" }

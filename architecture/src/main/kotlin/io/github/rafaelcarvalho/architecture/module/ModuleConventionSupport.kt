@@ -17,6 +17,8 @@ internal fun Project.configureModuleDependencies() {
     addCatalogDependencies(
         listOf(
             CatalogDependency.library("spring-boot-starter-webflux"),
+            CatalogDependency.library("spring-boot-starter-security"),
+            CatalogDependency.library("spring-boot-starter-oauth2-resource-server"),
             CatalogDependency.library("spring-boot-starter-validation"),
             CatalogDependency.library("spring-boot-starter-actuator"),
             CatalogDependency.library("reactor-kotlin-extensions"),

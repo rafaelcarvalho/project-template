@@ -15,6 +15,8 @@ internal data class CatalogDependency(
 
         fun platform(alias: String): CatalogDependency = CatalogDependency(alias = alias, isPlatform = true)
 
+        fun runtimeLibrary(alias: String): CatalogDependency = CatalogDependency(alias = alias, scope = "runtimeOnly")
+
         fun testLibrary(alias: String): CatalogDependency = CatalogDependency(alias = alias, scope = "testImplementation")
     }
 }
