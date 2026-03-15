@@ -140,6 +140,7 @@ private val CLOUD_PROVIDER_MAPPINGS: Map<CloudProvider, CloudProviderMapping> =
                         CloudCapability.RDS to
                             listOf(
                                 CatalogDependency.library("spring-boot-starter-data-r2dbc"),
+                                CatalogDependency.library("spring-boot-starter-flyway"),
                                 CatalogDependency.runtimeLibrary("r2dbc-postgresql"),
                                 CatalogDependency.library("aws-rds"),
                                 CatalogDependency.library("aws-rdsdata"),
@@ -176,6 +177,7 @@ private val CLOUD_PROVIDER_MAPPINGS: Map<CloudProvider, CloudProviderMapping> =
                         CloudCapability.RDS to
                             listOf(
                                 CatalogDependency.library("spring-boot-starter-data-r2dbc"),
+                                CatalogDependency.library("spring-boot-starter-flyway"),
                                 CatalogDependency.runtimeLibrary("r2dbc-postgresql"),
                                 CatalogDependency.library("gcp-alloydb"),
                                 CatalogDependency.library("gcp-alloydb-connectors"),
@@ -205,6 +207,7 @@ private val CLOUD_PROVIDER_MAPPINGS: Map<CloudProvider, CloudProviderMapping> =
                     mapOf(
                         CloudCapability.RDS to
                             listOf(
+                                CatalogDependency.library("spring-boot-starter-flyway"),
                                 CatalogDependency.library("oracle-jdbc"),
                                 CatalogDependency.library("oci-database"),
                             ),
@@ -225,6 +228,7 @@ private val CLOUD_PROVIDER_MAPPINGS: Map<CloudProvider, CloudProviderMapping> =
                         CloudCapability.RDS to
                             listOf(
                                 CatalogDependency.library("spring-boot-starter-data-r2dbc"),
+                                CatalogDependency.library("spring-boot-starter-flyway"),
                                 CatalogDependency.runtimeLibrary("r2dbc-postgresql"),
                                 CatalogDependency.testLibrary("testcontainers-postgresql"),
                             ),

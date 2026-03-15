@@ -6,4 +6,4 @@ plugins {
     id("rafaelcarvalho.demo")
 }
 
-extra["cloud.capabilities"] = "rds,broker"
+extra["cloud.capabilities"] = "rds,nosql,broker,storage"
