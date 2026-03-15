@@ -12,6 +12,7 @@ reactor-kotlin-extensions = "1.2.3"
 coroutines = "1.10.2"
 testcontainers = "1.21.3"
 konsist = "0.17.3"
+minio = "8.5.17"
 jacoco = "0.8.13"
 spring-cloud-contract = "4.3.0"
 aws-sdk = "2.31.28"
@@ -54,6 +55,10 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 springmockk = { module = "com.ninja-squad:springmockk", version.ref = "springmockk" }
 testcontainers-junit = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
 testcontainers-localstack = { module = "org.testcontainers:localstack", version.ref = "testcontainers" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql", version.ref = "testcontainers" }
+testcontainers-mongodb = { module = "org.testcontainers:mongodb", version.ref = "testcontainers" }
+testcontainers-kafka = { module = "org.testcontainers:kafka", version.ref = "testcontainers" }
+testcontainers-gcloud = { module = "org.testcontainers:gcloud", version.ref = "testcontainers" }
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 aws-dynamodb = { module = "software.amazon.awssdk:dynamodb", version.ref = "aws-sdk" }
 aws-rds = { module = "software.amazon.awssdk:rds", version.ref = "aws-sdk" }
@@ -73,6 +78,9 @@ gcp-pubsub = { module = "com.google.cloud:google-cloud-pubsub" }
 gcp-storage = { module = "com.google.cloud:google-cloud-storage" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 oracle-jdbc = { module = "com.oracle.database.jdbc:ojdbc11", version.ref = "oracle-jdbc" }
+spring-boot-starter-data-mongodb-reactive = { module = "org.springframework.boot:spring-boot-starter-data-mongodb-reactive" }
+spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+minio = { module = "io.minio:minio", version.ref = "minio" }
 oci-bom = { module = "com.oracle.oci.sdk:oci-java-sdk-bom", version.ref = "oci-sdk" }
 oci-common = { module = "com.oracle.oci.sdk:oci-java-sdk-common", version.ref = "oci-sdk" }
 oci-common-httpclient-jersey3 = { module = "com.oracle.oci.sdk:oci-java-sdk-common-httpclient-jersey3", version.ref = "oci-sdk" }

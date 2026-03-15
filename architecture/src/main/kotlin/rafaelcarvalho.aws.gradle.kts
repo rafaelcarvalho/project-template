@@ -18,13 +18,23 @@ configureCloudDependencies(
                     CloudDependency.library("aws-rds"),
                     CloudDependency.library("aws-rdsdata"),
                     CloudDependency.library("aws-secretsmanager"),
+                    CloudDependency.testLibrary("testcontainers-localstack"),
                 ),
-            CloudCapability.NOSQL to listOf(CloudDependency.library("aws-dynamodb")),
+            CloudCapability.NOSQL to
+                listOf(
+                    CloudDependency.library("aws-dynamodb"),
+                    CloudDependency.testLibrary("testcontainers-localstack"),
+                ),
             CloudCapability.BROKER to
                 listOf(
                     CloudDependency.library("aws-sns"),
                     CloudDependency.library("aws-sqs"),
+                    CloudDependency.testLibrary("testcontainers-localstack"),
                 ),
-            CloudCapability.STORAGE to listOf(CloudDependency.library("aws-s3")),
+            CloudCapability.STORAGE to
+                listOf(
+                    CloudDependency.library("aws-s3"),
+                    CloudDependency.testLibrary("testcontainers-localstack"),
+                ),
         ),
 )

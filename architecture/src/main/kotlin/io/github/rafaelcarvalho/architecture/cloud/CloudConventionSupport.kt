@@ -21,6 +21,10 @@ internal enum class CloudProvider(
         id = "oci",
         importPrefixes = setOf("com.oracle.bmc"),
     ),
+    NONE(
+        id = "none",
+        importPrefixes = emptySet(),
+    ),
 }
 
 internal enum class CloudCapability(
@@ -64,11 +68,14 @@ internal open class CloudPlatformExtension internal constructor(
 internal data class CloudDependency(
     val alias: String,
     val isPlatform: Boolean = false,
+    val scope: String = "implementation",
 ) {
     companion object {
         fun library(alias: String): CloudDependency = CloudDependency(alias = alias)
 
         fun platform(alias: String): CloudDependency = CloudDependency(alias = alias, isPlatform = true)
+
+        fun testLibrary(alias: String): CloudDependency = CloudDependency(alias = alias, scope = "testImplementation")
     }
 }
 
@@ -127,9 +134,9 @@ private fun Project.addLibraries(dependenciesToAdd: List<CloudDependency>) {
             }
 
         if (dependency.isPlatform) {
-            dependencies.add("implementation", dependencies.platform(dependencyProvider.get()))
+            dependencies.add(dependency.scope, dependencies.platform(dependencyProvider.get()))
         } else {
-            dependencies.add("implementation", dependencyProvider.get())
+            dependencies.add(dependency.scope, dependencyProvider.get())
         }
     }
 }
