@@ -2,7 +2,7 @@ import org.gradle.api.attributes.Bundling
 
 plugins {
     `kotlin-dsl`
-    id("dev.detekt") version "2.0.0-alpha.2"
+    id("dev.detekt") version "2.0.0-alpha.3"
 }
 
 group = "io.github.rafaelcarvalho.architecture"
